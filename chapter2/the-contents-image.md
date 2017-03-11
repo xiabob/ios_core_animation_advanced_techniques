@@ -5,7 +5,7 @@ CALayer 有一个属性叫做`contents`，这个属性的类型被定义为id，
 
 头疼的不仅仅是我们刚才提到的这个问题。事实上，你真正要赋值的类型应该是CGImageRef，它是一个指向CGImage结构的指针。UIImage有一个CGImage属性，它返回一个"CGImageRef",如果你想把这个值直接赋值给CALayer的`contents`，那你将会得到一个编译错误。因为CGImageRef并不是一个真正的Cocoa对象，而是一个Core Foundation类型。
 
-尽管Core Foundation类型跟Cocoa对象在运行时貌似很像（被称作toll-free bridging），他们并不是类型兼容的，不过你可以通过bridged关键字转换。如果要给图层的寄宿图赋值，你可以按照以下这个方法：
+尽管Core Foundation类型跟Cocoa对象在运行时貌似很像（被称作[toll-free bridging](http://gracelancy.com/blog/2014/04/21/toll-free-bridging/)），他们并不是类型兼容的，不过你可以通过bridged关键字转换。如果要给图层的寄宿图赋值，你可以按照以下这个方法：
 
 ``` objective-c
 layer.contents = (__bridge id)image.CGImage;
